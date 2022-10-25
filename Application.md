@@ -81,7 +81,7 @@ payload:
 {
     "content": "This is a new assignment"
 }
-
+pytest tests/ --cov
 response:
 {
   "id": 12,

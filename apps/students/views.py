@@ -6,11 +6,11 @@ from apps.teachers.models import Teacher
 from .models import Assignment, Student
 from .serializers import StudentAssignmentSerializer
 
-
 class AssignmentsView(generics.ListCreateAPIView):
     serializer_class = StudentAssignmentSerializer
 
     def get(self, request, *args, **kwargs):
+        print(request.user.id)
         assignments = Assignment.objects.filter(student__user=request.user)
 
         return Response(
@@ -40,7 +40,7 @@ class AssignmentsView(generics.ListCreateAPIView):
     def patch(self, request, *args, **kwargs):
         student = Student.objects.get(user=request.user)
         request.data['student'] = student.id
-
+        print(request.data)
         if 'teacher_id' in request.data:
             teacher = Teacher.objects.get(pk=request.data['teacher_id'])
             request.data['teacher'] = teacher.id

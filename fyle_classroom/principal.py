@@ -19,7 +19,6 @@ class Principal(BaseAuthentication):
             user = User.objects.get(pk=principal['user_id'])
         except User.DoesNotExist:
             raise AuthenticationFailed('User not found for this principal')
-
         return user, None
 
     @staticmethod
